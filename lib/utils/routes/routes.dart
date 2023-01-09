@@ -16,7 +16,7 @@ class Routes {
 
       case RoutesName.login:
         return MaterialPageRoute(
-            builder: (BuildContext context) => const LoginScreen());
+            builder: (BuildContext context) => const LoginView());
       case RoutesName.signUp:
         return MaterialPageRoute(
             builder: (BuildContext context) => const SignUpSCreen());
