@@ -12,6 +12,8 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  FocusNode emailFocusNode = FocusNode();
+  FocusNode passwordFocusNode = FocusNode();
 
   @override
   void dispose() {
@@ -19,6 +21,9 @@ class _LoginViewState extends State<LoginView> {
 
     _emailController.dispose();
     _passwordController.dispose();
+
+    emailFocusNode.dispose();
+    passwordFocusNode.dispose();
   }
 
   @override
@@ -37,15 +42,21 @@ class _LoginViewState extends State<LoginView> {
             TextFormField(
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
+              focusNode: emailFocusNode,
               decoration: const InputDecoration(
                   hintText: 'Email',
                   labelText: 'Email',
                   prefixIcon: Icon(Icons.alternate_email)),
+              onFieldSubmitted: (valu) {
+                Utils.fieldFocusChange(
+                    context, emailFocusNode, passwordFocusNode);
+              },
             ),
             TextFormField(
               controller: _passwordController,
               obscureText: true,
               obscuringCharacter: "*",
+              focusNode: passwordFocusNode,
               decoration: const InputDecoration(
                 hintText: 'Password',
                 labelText: 'Password',
